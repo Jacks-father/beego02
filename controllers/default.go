@@ -31,6 +31,21 @@ func (c *MainController) Get() {
 	c.TplName = "index.tpl"
 }
 func (c *MainController) post(){
+	var person models.Person
+	dataBytes,err :=ioutil.ReadAll(c.Ctx.Request.Body)
+	if err !=nil{
+		c.Ctx.WriteString("数据解析失败，请重试")
+	}
+	err = json.Unmarshal(dataBytes,&person)
+	if err != nil {
+		c.Ctx.WriteString("数据解析失败")
+		return
+	}
+	fmt.Println("姓名",person.Name)
+	fmt.Println("生日",person.Birthday)
+	fmt.Println("地址",person.Address)
+	fmt.Println("昵称",person.Nick)
+	c.Ctx.WriteString("数据解析成功")
 	//for i:=0;i<10 ;i++  {
 	//fmt.Printf("第%d次打印\n",i)
 
@@ -44,16 +59,16 @@ func (c *MainController) post(){
 	//return
 //}
 	//c.Ctx.WriteString("成功")
-	var person models.Person
-	dateBytes,err :=ioutil.ReadAll(c.Ctx.Request.Body)
-	if err !=nil {
-		c.Ctx.WriteString("重试")
-	}
-	err =json.Unmarshal(dateBytes,&person)
-	if err !=nil {
-		c.Ctx.WriteString("重试")
-	}
-	fmt.Println("姓名：",person.Name)
-	c.Ctx.WriteString("SUCCESS")
+	//var person models.Person
+	//dateBytes,err :=ioutil.ReadAll(c.Ctx.Request.Body)
+	//if err !=nil {
+	//	c.Ctx.WriteString("重试")
+	//}
+	//err =json.Unmarshal(dateBytes,&person)
+	//if err !=nil {
+	//	c.Ctx.WriteString("重试")
+	//}
+	//fmt.Println("姓名：",person.Name)
+	//c.Ctx.WriteString("SUCCESS")
 
 }
