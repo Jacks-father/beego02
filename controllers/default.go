@@ -66,5 +66,4 @@ func (c *MainController) post(){
 	//}
 	//fmt.Println("姓名：",person.Name)
 	//c.Ctx.WriteString("SUCCESS")
-
 }
